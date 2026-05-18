@@ -113,26 +113,3 @@ eff	疫苗有效性（默认 0.8，即 80%）
 
 联系方式
 如有问题或建议，请在 GitHub 仓库提交 Issue。
-
-text
-
-## 需要您根据实际情况微调的地方
-
-1. **目录结构**：请确认您仓库中的实际文件组织是否与上述结构一致。如果所有脚本都在根目录，请将 `scripts/` 前缀去掉或相应调整。
-2. **`requirements.txt`**：如果尚未创建，请在根目录新建一个文件，内容为：
-pdfplumber>=0.10.0
-pandas>=2.0.0
-numpy>=1.24.0
-
-text
-3. **许可证文件**：如果尚未添加 `LICENSE`，请在 GitHub 仓库页面点击 **Add file** → **Create new file**，文件名输入 `LICENSE`，然后选择 “Choose a license template” → 选 **MIT License**，填写年份和作者。
-4. **作者姓名和论文标题**：在引用信息处替换为您的真实信息。
-5. **路径问题**：确保脚本中的文件路径使用相对路径（如 `../data/` 或 `./`），不要留有您本地的绝对路径（如 `D:\...`）。如果当前代码中还有硬编码路径，建议修改后再推送。
-
-## 推送更新
-
-将修改后的 `README.md`、`requirements.txt`、`LICENSE` 等文件提交并推送到 GitHub：
-```bash
-git add README.md requirements.txt LICENSE
-git commit -m "完善 README 和开源文件"
-git push origin main
