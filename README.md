@@ -1,251 +1,169 @@
-# 基于 SIR 模型的我国呼吸道疾病传播与防控策略研究
+# 基于 SIR 模型的呼吸道疾病传播研究 / SIR-Based Respiratory-Disease Study
 
-[![DOI](https://zenodo.org/badge/1191901845.svg)](https://doi.org/10.5281/zenodo.20267603)
+<p align="center"><strong>从周报数据提取、南北区域分波拟合到疫苗、管控和组合干预模拟，形成完整的传染病动力学研究流程。</strong><br>An end-to-end epidemiological workflow from weekly-report extraction and regional wave fitting to vaccine, control, and combined-intervention simulations.</p>
 
-本仓库包含与学位论文附录的完整源代码，用于处理中国流感监测周报（PDF），提取南北方 ILI%、检测数、阳性数等关键指标，构建观测感染代理序列 \( I_{obs} \)，并基于 SIR 动力学模型进行参数估计与干预情景模拟（疫苗接种、接触管控及组合策略）。
+<p align="center">![Tech](https://img.shields.io/badge/stack-Python%20%2B%20MATLAB-2563eb) ![Docs](https://img.shields.io/badge/docs-中文%20%7C%20English-16a34a) ![Status](https://img.shields.io/badge/status-portfolio--ready-f59e0b)</p>
 
-# 基于 SIR 模型的我国呼吸道疾病传播与防控策略研究
-# 项目简介
+<p align="center"><a href="#中文说明">中文</a> · <a href="#english">English</a> · <a href="#结果展示--results">结果展示 / Results</a> · <a href="#复现--reproduction">复现 / Reproduction</a></p>
 
-本项目基于 SIR 传染病动力学模型，结合中国 2024–2025 年流感监测周报数据，研究我国南北区域流感传播差异，并评估不同防控策略（疫苗接种与接触管控）的效果。
+## 中文说明
 
-通过构建 南北分区 + 多波次传播模型，并进行参数估计与情景模拟，项目为区域化疫情防控提供了量化分析依据。
+### 项目定位
 
-# 研究目标
-分析我国南北地区流感传播差异
-构建多波次 SIR 传播模型
-基于真实监测数据进行参数估计
-评估不同防控策略（疫苗 / 管控 / 组合）的效果
-为政策制定提供定量参考
-# 项目结构
-├── main.m                % 主程序（整体流程控制）
-├── mainSIR.m            % SIR模型主入口
-├── sir_ode.m            % SIR微分方程
-├── sir_simulate.m       % 模型仿真
-├── fit_sir.m            % 参数拟合（带输出）
-├── fit_sir_quiet.m      % 参数拟合（静默版本）
-├── data/                % 预处理后的数据（建议自行添加）
-├── results/             % 模型结果与图表（建议自行添加）
-└── README.md
-表格概括如下：
-程序文件名	                                            程序实现功能	                                                       开发语言
-batch_rename.bat	                           依据文件修改时间完成 PDF 文件批量重命名	                                        BAT
-rename_pdfs.py	                  读取流感监测周报内容，依据监测周期换算 ISO 周次，规范统一文件命名	                           Python
-extract_flu_data.py        	批量提取南北区域流感样病例占比、病毒检测数量、阳性病例数量并导出标准化 CSV 数据文件	                Python
-check_data_quality.py	        完成原始监测数据质量校验，包含缺失值筛查、重复数据剔除、周度数据异常突变检验、数据逻辑一致性核查	   Python
-preprocess.m	                完成原始统计数据预处理，计算流感病毒阳性率、构建观测感染代理指标，搭建连续时序研究数据序列	         MATLAB
-mainSIR.m	                    实现经典 SIR 传染病传播模型参数拟合、模型参数置信区间计算、多类防疫干预情景仿真模拟	              MATLAB
-sir_ode.m、sir_simulate.m、fit_sir_quiet.m	搭建 SIR 模型微分方程、完成模型数值求解、构建模型静默拟合辅助运算函数	              MATLAB
-# 数据来源与处理
-# 数据来源
-中国流感监测周报（2024–2025，共 104 份）
-# 数据处理流程
-批量解析 PDF 周报
-提取关键指标：
-ILI%（流感样病例比例）
-病毒检测阳性率
-构造观测感染代理变量：
-I
-obs
-	​
+从周报数据提取、南北区域分波拟合到疫苗、管控和组合干预模拟，形成完整的传染病动力学研究流程。 本仓库强调“问题—方法—代码—结果”的对应关系，适合作为课程作业、算法练习或建模研究的可复现档案。
 
-=ILI%×阳性率
-构建时间序列数据用于模型拟合
-# 模型方法
-# SIR 模型
+### 核心方法
 
-将人群划分为：
+- PDF/表格数据整理 / report and spreadsheet preprocessing
+- SIR 常微分方程与参数估计 / SIR ODEs and parameter estimation
+- 区域、波次与干预情景比较 / region, wave, and intervention comparisons
 
-S：易感者（Susceptible）
-I：感染者（Infected）
-R：移除者（Recovered）
+## English
 
-⎩
-⎨
-⎧
-	​
+### Positioning
 
-dt
-dS
-	​
+An end-to-end epidemiological workflow from weekly-report extraction and regional wave fitting to vaccine, control, and combined-intervention simulations. The repository keeps the problem statement, implementation, and outputs close together so the work can be inspected and reproduced.
 
-=−βSI
-dt
-dI
-	​
+### What is demonstrated
 
-=βSI−γI
-dt
-dR
-	​
+- PDF/表格数据整理 / report and spreadsheet preprocessing
+- SIR 常微分方程与参数估计 / SIR ODEs and parameter estimation
+- 区域、波次与干预情景比较 / region, wave, and intervention comparisons
 
-=γI
-	​
+## 问题拆解 / Problem Breakdown
+
+| 阶段 / Stage | 中文说明 | English description |
+| --- | --- | --- |
+| 输入 / Input | 整理 `周报数据 / Reports` 及模型所需参数，检查单位、范围和文件位置。 | Prepare the 周报数据 / Reports and validate units, ranges, and file locations. |
+| 处理 / Process | 通过 `区域分波 / Segment` 将原始问题转换为可计算表示。 | Convert the original problem into a computable representation through 区域分波 / Segment. |
+| 求解 / Solve | 执行 `SIR 拟合 / Fit`，保留中间结果以便检查。 | Execute SIR 拟合 / Fit and retain intermediate artifacts for inspection. |
+| 输出 / Output | 生成 `干预模拟 / Simulate`，并结合约束解释结果。 | Produce 干预模拟 / Simulate and interpret it together with the constraints. |
+
+## 方法设计 / Method Design
+
+| # | 方法与作用 / Method and role |
+| ---: | --- |
+| 1 | PDF/表格数据整理 / report and spreadsheet preprocessing |
+| 2 | SIR 常微分方程与参数估计 / SIR ODEs and parameter estimation |
+| 3 | 区域、波次与干预情景比较 / region, wave, and intervention comparisons |
+
+这些模块彼此独立但按数据流连接：输入准备负责可计算性，核心算法负责求解，结果层负责把数字转换为可审查的图、表或状态序列。
+
+These modules are separated but connected by the data flow: input preparation ensures computability, the core algorithm solves the model, and the output layer turns numbers into inspectable figures, tables, or state sequences.
+
+## 工作流 / Workflow
+
+```mermaid
+flowchart LR
+    A["周报数据 / Reports"] --> B["区域分波 / Segment"] --> C["SIR 拟合 / Fit"] --> D["干预模拟 / Simulate"]
+```
+
+## 结果展示 / Results
+
+| <img src="2024-2025跨年波_north/01_观测vs拟合.png" alt="北方跨年波拟合 / Northern cross-year wave fit" width="100%"><br><sub>北方跨年波拟合 / Northern cross-year wave fit</sub> | <img src="2024-2025跨年波_south/01_观测vs拟合.png" alt="南方跨年波拟合 / Southern cross-year wave fit" width="100%"><br><sub>南方跨年波拟合 / Southern cross-year wave fit</sub> | <img src="2024-2025跨年波_north/06_组合情景.png" alt="组合干预 / Combined intervention" width="100%"><br><sub>组合干预 / Combined intervention</sub> |
+| --- | --- | --- |
 
 
-其中：
+**验证摘要 / Verification summary**
 
-β：传播率
-γ：恢复率
-R₀ = β / γ：基本再生数
-# 参数估计方法
-非线性最小二乘（Nonlinear Least Squares）
-多起点优化（避免局部最优）
-雅可比矩阵估计参数协方差（不确定性分析）
-# 分区与波次设计
+仓库包含 46 张观测—拟合、残差诊断和防控情景图，以及参数与情景结果表。 / Includes 46 fit, residual-diagnostic, and intervention figures plus parameter/result workbooks.
 
-共构建 4 个模型：
+> 图表来自仓库现有输出或本地实际运行生成；README 不使用虚构指标。
+> Figures are existing project outputs or were generated by an actual local run; no performance metric is fabricated.
 
-区域	波次
-北方	跨年波
-南方	跨年波
-北方	年末波
-南方	年末波
-# 核心结果
-# 区域差异
-南方整体传播潜力（R₀）更高
-北方传播率 β 更大（传播更“猛”但周期短）
-# 波次差异
-南方年末波强于跨年波
-北方两次波动较为接近
-# 防控策略模拟
-# 情景设置
-疫苗接种率：0% ~ 40%
-接触减少率：0% ~ 40%
-单一干预 & 组合干预
-📊 关键结论
-情景	峰值下降	累计感染
-强干预（40%+40%）	↓ 90.9%	13.6%
-中等干预（20%+20%）	↓ 61.7%	显著下降
+### 如何阅读结果 / How to Read the Results
 
-# 结论：
+- 先核对标题、坐标轴、单位和情景标签，再比较曲线、最优值或状态变化。
+- Check titles, axes, units, and scenario labels before comparing curves, optima, or state transitions.
+- 图像用于回答“模型产生了什么”，脚本和数据用于回答“结果如何得到”。
+- Figures answer *what the model produced*; scripts and data answer *how it was produced*.
+- 不同脚本的参数可能服务于不同子问题，跨图比较前应先确认参数口径一致。
+- Parameters may belong to different subtasks; confirm a shared definition before comparing figures.
 
-强干预效果极显著，但成本较高
-中等干预性价比更优，更适合现实
-# 如何运行
-# 环境要求
-MATLAB R2020a 及以上
-# 运行步骤
-% 直接运行主程序
-main.m
+## 项目结构 / Project Map
 
-或：
+| 路径 / Path | 作用 / Purpose |
+| --- | --- |
+| `mainSIR.m` | MATLAB 主分析 / MATLAB analysis entry |
+| `sir_simulate.m` | SIR 仿真 / simulation |
+| `extract_flu_data.py` | 数据提取 / data extraction |
+| `模型参数对比表.xlsx` | 参数汇总 / parameter summary |
 
-mainSIR.m
-# 输出内容
-参数估计结果（β, γ, R₀）
-拟合曲线对比图
-各类干预情景模拟结果
-峰值与累计感染统计
-# 项目特点
-# 基于真实监测数据（非模拟数据）
-# 首次实现南北分区建模
-# 多波次建模（跨年 + 年末）
-# 多情景策略评估（单一 + 组合）
-# 定量评估防控效果
-# 局限性
-使用 ILI% × 阳性率作为感染代理变量（存在近似）
-未考虑人口流动与年龄结构
-未引入 SEIR 潜伏期机制
-# 未来改进方向
-引入 SEIR / SEIRS 模型
-融合气候与人口流动数据
-结合机器学习进行参数预测
-构建实时预测系统
-# 参考
-WHO 流感报告
-中国国家流感中心（CNIC）周报
-经典 SIR 传染病模型文献
-# 致谢
+## 复现 / Reproduction
 
-感谢流感监测数据的公开发布，以及相关研究工作的支持。
+### 环境 / Environment
 
+- MATLAB 项目建议使用 MATLAB R2025a 或兼容版本；含 `regress`、`linprog` 等函数的脚本可能需要 Statistics and Machine Learning Toolbox 或 Optimization Toolbox。
+- For MATLAB projects, MATLAB R2025a or a compatible release is recommended. Scripts using functions such as `regress` or `linprog` may require the relevant toolbox.
+- 非 MATLAB 项目的额外条件见下面的运行命令与项目文件。
+- For non-MATLAB projects, see the command and project files below for additional requirements.
 
-## 环境要求
+### 快速开始 / Quick Start
 
-### Python 3.8+
-- `pdfplumber` – 解析 PDF 表格与文本
-- `pandas` – 数据处理
-- `numpy` – 数值计算
-
-安装命令：
-pip install pdfplumber pandas numpy
-MATLAB R2020b 或更高版本
-需要 Optimization Toolbox（提供 lsqcurvefit 函数）
-
-无需其他工具箱
-
-使用流程
-1. 准备 PDF 数据
-从国家流感中心官网下载监测周报（PDF 格式）
-
-将 PDF 放入 data/ 文件夹
-
-运行 batch_rename.bat 或 rename_pdfs.py 将文件重命名为 年份_W周次.pdf 格式
-
-2. 提取数据到 CSV
-bash
-cd scripts
+```text
 python extract_flu_data.py
-输出文件：周报原始数据表.csv（保存在当前目录）
+# Then open MATLAB:
+mainSIR
+```
 
-3. 质量检查（可选）
-bash
-python check_data_quality.py
-4. MATLAB 预处理与建模
-在 MATLAB 中依次运行：
+1. 克隆仓库并保持现有目录结构。 / Clone the repository and preserve its directory structure.
+2. 从仓库根目录或脚本所在目录运行上面的入口。 / Run the entry point from the repository root or the script's own directory.
+3. 若脚本依赖数据文件，请勿移动配套的 CSV、XLSX、MAT 或资源目录。 / Keep companion CSV, XLSX, MAT, and asset files in place.
 
-matlab
-preprocess       % 生成 I_obs 并保存 processed_data.mat
-mainSIR          % 执行 SIR 拟合与情景模拟
-结果将自动保存在 results/ 文件夹中，包括：
+### 复现检查清单 / Reproduction Checklist
 
-模型参数对比表.xlsx：各波次、区域的 β, γ, R₀ 及拟合优度
+| 检查项 / Check | 预期 / Expected |
+| --- | --- |
+| 工作目录 / Working directory | 当前目录能找到入口脚本及其相对路径依赖。 / Entry scripts and relative dependencies resolve correctly. |
+| 依赖 / Dependencies | 所需工具箱、运行时或框架已安装。 / Required toolboxes, runtimes, or frameworks are installed. |
+| 数据 / Data | 文件名、工作表、列顺序和单位未被意外修改。 / Filenames, sheets, column order, and units remain unchanged. |
+| 随机性 / Randomness | 随机项目在对比实验时固定随机种子。 / Randomized projects use a fixed seed for comparisons. |
+| 输出 / Outputs | 控制台无未处理异常，图表或结果文件成功生成。 / No unhandled error appears and expected artifacts are generated. |
 
-情景模拟结果表.xlsx：疫苗、管控、组合干预的峰值/累计感染下降百分比
+## 验证状态 / Validation Status
 
-各波次/区域的子文件夹：内含拟合曲线、残差分析、干预效果图等
+| 层级 / Layer | 状态 / Status | 说明 / Notes |
+| --- | --- | --- |
+| 仓库结构 / Repository structure | ✅ 已检查 / Checked | 入口、核心源码和配套资源已盘点。 / Entry points, source, and companion assets were inventoried. |
+| README 链接 / README links | ✅ 已检查 / Checked | 本地图片引用已做存在性校验。 / Local image references were checked for existence. |
+| 结果真实性 / Result provenance | ✅ 已检查 / Checked | 仅引用已有输出或实际执行生成的结果。 / Only existing or locally reproduced outputs are shown. |
+| 全环境复现 / Full environment | 见上方摘要 / See summary | 交互、数据库、Unity 或特定工具箱项目可能需要额外环境。 / Interactive, database, Unity, or toolbox-dependent projects may need extra setup. |
 
-总览图/ 文件夹：R₀ 条形图、干预效果对比总览等
+## 可扩展方向 / Roadmap Ideas
 
-重要参数说明
-参数	含义
-β
-β	有效传播率（每周每个感染者导致的易感者感染概率）
-γ
-γ	恢复率（每周感染者康复的比例）
-R
-0
-=
-β
-/
-γ
-R 
-0
-​
- =β/γ	基本再生数（完全易感人群中的平均传染人数）
-a
-a	尺度因子（将模型模拟的感染比例映射到观测指标 
-I
-o
-b
-s
-I 
-obs
-​
- ）
-eff
-eff	疫苗有效性（默认 0.8，即 80%）
-引用信息
-若您在研究中使用本代码，请引用：
+- 将固定参数集中到配置文件，并为单位、范围和缺失值增加输入校验。
+- Move fixed parameters into configuration files and validate units, ranges, and missing values.
+- 为核心函数增加最小测试用例，覆盖正常、边界和不可行情形。
+- Add small tests for normal, boundary, and infeasible cases.
+- 将关键数值结果同步导出为 CSV/JSON，并自动生成对比图和实验摘要。
+- Export key numeric results to CSV/JSON and generate comparison figures and experiment summaries automatically.
+- 对随机或优化算法记录随机种子、求解器版本、停止条件和运行时间。
+- Record seeds, solver versions, stopping criteria, and runtime for randomized or optimization routines.
 
-作者姓名，论文标题，学位论文，年份。DOI: 10.5281/zenodo.20267603
+## 已知限制 / Known Limits
 
-同时建议引用依赖的开源工具：pdfplumber, pandas, numpy, MATLAB 及 Optimization Toolbox。
+- 这是学习与研究型项目，参数、数据范围和结论应结合原始场景解释，不宜直接用于生产决策。
+  This is an educational/research project; interpret parameters and conclusions within the original scenario before any real-world use.
+- 部分早期脚本采用交互式输入或固定相对路径；若批处理运行，请先检查入口文件。
+  Some early scripts use interactive input or fixed relative paths; inspect the entry point before automating it.
 
-许可证
-本项目采用 MIT 许可证，详情见仓库中的 LICENSE 文件。
-数据来源于国家流感中心公开周报，仅限学术研究使用。使用本代码产生的结果请遵守相关数据使用协议。
+## 常见问题 / FAQ
 
-联系方式
-如有问题或建议，请在 GitHub 仓库提交 Issue。
+**为什么运行后没有图？ / Why is no figure displayed?**
+
+部分入口只输出数值或状态序列；也可能是脚本尚未运行到绘图阶段。先检查控制台，再查看结果目录。
+Some entries produce only numeric or state output. Check the console first, then inspect the result directory.
+
+**为什么结果和 README 略有不同？ / Why do my results differ slightly?**
+
+求解器版本、随机种子、浮点误差、数据版本或交互输入都可能造成差异。请先按复现清单核对环境。
+Solver versions, random seeds, floating-point behavior, data revisions, or interactive inputs can all cause differences.
+
+## 贡献 / Contributing
+
+欢迎通过 Issue 提交复现问题、改进建议或新的对照实验。
+Issues describing reproduction problems, improvements, or additional comparison experiments are welcome.
+
+---
+
+如果这个项目对你有帮助，欢迎 Star。 / If this project is useful, consider giving it a star.
