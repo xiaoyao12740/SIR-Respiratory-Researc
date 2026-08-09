@@ -2,7 +2,7 @@
 
 <p align="center"><strong>从周报数据提取、南北区域分波拟合到疫苗、管控和组合干预模拟，形成完整的传染病动力学研究流程。</strong><br>An end-to-end epidemiological workflow from weekly-report extraction and regional wave fitting to vaccine, control, and combined-intervention simulations.</p>
 
-<p align="center">![Tech](https://img.shields.io/badge/stack-Python%20%2B%20MATLAB-2563eb) ![Docs](https://img.shields.io/badge/docs-中文%20%7C%20English-16a34a) ![Status](https://img.shields.io/badge/status-portfolio--ready-f59e0b)</p>
+<p align="center"><img alt="Tech stack" src="https://img.shields.io/badge/stack-Python%20%2B%20MATLAB-2563eb"> <img alt="Documentation language" src="https://img.shields.io/badge/docs-中文%20%7C%20English-16a34a"> <img alt="Project status" src="https://img.shields.io/badge/status-portfolio--ready-f59e0b"></p>
 
 <p align="center"><a href="#中文说明">中文</a> · <a href="#english">English</a> · <a href="#结果展示--results">结果展示 / Results</a> · <a href="#复现--reproduction">复现 / Reproduction</a></p>
 
