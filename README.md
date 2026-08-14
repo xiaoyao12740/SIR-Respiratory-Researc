@@ -2,7 +2,7 @@
 
 <p align="center"><strong>从周报数据提取、南北区域分波拟合到疫苗、管控和组合干预模拟，形成完整的传染病动力学研究流程。</strong><br>An end-to-end epidemiological workflow from weekly-report extraction and regional wave fitting to vaccine, control, and combined-intervention simulations.</p>
 
-<p align="center"><img alt="Tech stack" src="https://img.shields.io/badge/stack-Python%20%2B%20MATLAB-2563eb"> <img alt="Documentation language" src="https://img.shields.io/badge/docs-中文%20%7C%20English-16a34a"> <img alt="Project status" src="https://img.shields.io/badge/status-portfolio--ready-f59e0b"></p>
+<p align="center"><img alt="Tech stack" src="https://img.shields.io/badge/stack-Python%20%2B%20MATLAB-2563eb"> <img alt="Documentation language" src="https://img.shields.io/badge/docs-中文%20%7C%20English-16a34a"> <img alt="Project status" src="https://img.shields.io/badge/status-portfolio--ready-f59e0b"> <a href="https://doi.org/10.5281/zenodo.20267603"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.20267603.svg"></a></p>
 
 <p align="center"><a href="#中文说明">中文</a> · <a href="#english">English</a> · <a href="#结果展示--results">结果展示 / Results</a> · <a href="#复现--reproduction">复现 / Reproduction</a></p>
 
@@ -158,6 +158,17 @@ Some entries produce only numeric or state output. Check the console first, then
 
 求解器版本、随机种子、浮点误差、数据版本或交互输入都可能造成差异。请先按复现清单核对环境。
 Solver versions, random seeds, floating-point behavior, data revisions, or interactive inputs can all cause differences.
+
+## 引用 / Citation
+
+如需引用本项目，请使用仓库根目录中的 [`CITATION.cff`](CITATION.cff)。Zenodo 为本项目提供两个稳定标识：
+
+- 概念 DOI（始终指向本项目的所有版本）：[`10.5281/zenodo.20267603`](https://doi.org/10.5281/zenodo.20267603)
+- v1.0.0 版本 DOI（精确指向本次归档）：[`10.5281/zenodo.20267604`](https://doi.org/10.5281/zenodo.20267604)
+
+Please use [`CITATION.cff`](CITATION.cff) when citing this software. The concept DOI resolves to all archived versions; the version DOI resolves specifically to the v1.0.0 archive.
+
+> 姚卓宇 / Zhuoyu Yao. *SIR-Based Respiratory-Disease Study / 基于 SIR 模型的呼吸道疾病传播研究*. Version 1.0.0, 2026. https://doi.org/10.5281/zenodo.20267604
 
 ## 贡献 / Contributing
 
