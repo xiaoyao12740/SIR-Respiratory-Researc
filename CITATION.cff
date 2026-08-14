@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the archived version below. / 如使用本软件，请引用下列归档版本。"
+title: "SIR-Based Respiratory-Disease Study / 基于 SIR 模型的呼吸道疾病传播研究"
+type: software
+authors:
+  - family-names: Yao
+    given-names: Zhuoyu
+version: 1.0.0
+date-released: 2026-05-18
+doi: 10.5281/zenodo.20267604
+repository-code: "https://github.com/xiaoyao12740/SIR-Respiratory-Researc"
+url: "https://doi.org/10.5281/zenodo.20267604"
