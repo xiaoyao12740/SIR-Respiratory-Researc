@@ -159,10 +159,12 @@ Some entries produce only numeric or state output. Check the console first, then
 求解器版本、随机种子、浮点误差、数据版本或交互输入都可能造成差异。请先按复现清单核对环境。
 Solver versions, random seeds, floating-point behavior, data revisions, or interactive inputs can all cause differences.
 
-## 引用 / Citation
+## Citation / 引用
 
 如需引用本项目，请使用仓库根目录中的 [`CITATION.cff`](CITATION.cff)。Zenodo 为本项目提供两个稳定标识：
 
+- GitHub repository：[`xiaoyao12740/SIR-Respiratory-Researc`](https://github.com/xiaoyao12740/SIR-Respiratory-Researc)
+- Release 1.0.0：[`1.0.0`](https://github.com/xiaoyao12740/SIR-Respiratory-Researc/releases/tag/1.0.0)
 - 概念 DOI（始终指向本项目的所有版本）：[`10.5281/zenodo.20267603`](https://doi.org/10.5281/zenodo.20267603)
 - v1.0.0 版本 DOI（精确指向本次归档）：[`10.5281/zenodo.20267604`](https://doi.org/10.5281/zenodo.20267604)
 
